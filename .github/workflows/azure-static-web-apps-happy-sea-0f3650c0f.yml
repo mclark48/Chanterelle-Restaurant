@@ -1,6 +1,5 @@
 name: Azure Static Web Apps CI/CD
-
-on:
+\on:
   push:
     branches:
       - main
@@ -28,4 +27,4 @@ jobs:
           action: 'upload'
           app_location: 'Restaurant_Website-main/restaurant-project'
           api_location: ''
-          output_location: 'wwwroot'
+          output_location: 'bin/Release/net8.0/publish/wwwroot'
