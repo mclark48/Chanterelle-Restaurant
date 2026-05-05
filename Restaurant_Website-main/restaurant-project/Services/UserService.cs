@@ -20,7 +20,7 @@ public class UserService
     if (await reader.ReadAsync())
     {
         var dbHash = reader.GetString(2);
-        // Verify the entered password against the hashed password in the DB
+        // important. verified the password against the hashed pashword in NEON -@mclark48
         if (BCrypt.Net.BCrypt.Verify(password, dbHash))
         {
             return new User 
@@ -30,7 +30,7 @@ public class UserService
             };
         }
     }
-    return null; // Login failed
+    return null; // Login failed -@mclark48
 }
     private readonly string _connectionString;
 

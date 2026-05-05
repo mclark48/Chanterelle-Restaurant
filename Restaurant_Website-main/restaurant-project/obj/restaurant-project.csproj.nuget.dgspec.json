@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/workspaces/Restaurant_Website/restaurant-project/restaurant-project.csproj": {}
+    "/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/restaurant-project.csproj": {}
   },
   "projects": {
-    "/workspaces/Restaurant_Website/restaurant-project/restaurant-project.csproj": {
+    "/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/restaurant-project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/workspaces/Restaurant_Website/restaurant-project/restaurant-project.csproj",
+        "projectUniqueName": "/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/restaurant-project.csproj",
         "projectName": "restaurant-project",
-        "projectPath": "/workspaces/Restaurant_Website/restaurant-project/restaurant-project.csproj",
+        "projectPath": "/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/restaurant-project.csproj",
         "packagesPath": "/home/codespace/.nuget/packages/",
-        "outputPath": "/workspaces/Restaurant_Website/restaurant-project/obj/",
+        "outputPath": "/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/codespace/.nuget/NuGet/NuGet.Config"

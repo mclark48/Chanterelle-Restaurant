@@ -7,7 +7,7 @@
 
 <header class="site-header">
     <div class="logo">
-        <img src="images/logo.png" alt="Chanterelle's logo">
+        <img src="images/logo.png" alt="Chanterelle's logo" style="height: 50px;">
     </div>
     <nav class="main-nav">
         <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
@@ -21,54 +21,41 @@
     <div class="order-page">
         <h2 class="text-center my-4" style="font-family: 'Playfair Display', serif;">Authentic Italian Menu</h2>
 
-        <div class="menu-sections" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-    @foreach (var category in new[] { "Appetizer", "Pasta", "Main", "Dessert" })
-    {
-        <div class="category-block mb-5">
-            <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; font-style: italic; color: #2c1e1a;">
-                @category
-            </h2>
-            
-            <div class="menu-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px;">
-                @foreach (var item in MenuItems.Where(i => i.Category == category))
-                {
-                    <div class="menu-item-card">
-                        <div class="image-container">
-                            <img src="@item.ImagePath" alt="@item.Name" class="menu-image-spot" />
-                        </div>
-                        <div class="menu-info" style="padding: 25px; text-align: center;">
-                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 10px;">@item.Name</h3>
-                            <p style="font-family: 'Inter', sans-serif; font-weight: 300; color: #666; font-size: 0.9rem; line-height: 1.6;">
-                                @item.Description
-                            </p>
-                            <div style="margin-top: 20px;">
-                                <span class="menu-price" style="display: block; margin-bottom: 15px; font-size: 1.2rem;">
-                                    @item.Price.ToString("C")
-                                </span>
-                                <button class="btn-gold" 
-                                        style="width: auto; padding: 10px 40px; border-radius: 0; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;"
-                                        @onclick='() => AddToCart(item)'>
-                                    Add to Order
-                                </button>
+        <div class="menu-sections">
+            @foreach (var category in new[] { "Appetizer", "Pasta", "Main", "Dessert" })
+            {
+                <details open class="mb-4">
+                    <summary class="h4" style="font-family: 'Playfair Display', serif; color: #a52a2a; cursor: pointer; padding: 10px; background: #fdfaf5; border-radius: 8px;">@category Selection</summary>
+                    <div class="menu-grid">
+                        @foreach (var item in MenuItems.Where(i => i.Category == category))
+                        {
+                            <div class="menu-item-card">
+                                <img src="@item.ImagePath" alt="@item.Name" class="menu-image-spot" />
+                                <div class="menu-info">
+                                    <h3>@item.Name</h3>
+                                    <p>@item.Description</p>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <span class="menu-price">@item.Price.ToString("C")</span>
+                                        <button class="btn-gold" @onclick='() => AddToCart(item)'>Add to Order</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                }
-            </div>
+                </details>
+            }
         </div>
-    }
-</div>
 
         @if (cartCount > 0)
         {
-            <div class="cart-floating-bar" @onclick="ToggleCart">
-                <span class="cart-count-badge">@cartCount</span>
+            <div class="cart-floating-bar" @onclick="ToggleCart" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #2c1e1a; color: white; padding: 12px 30px; border-radius: 50px; display: flex; align-items: center; gap: 15px; cursor: pointer; z-index: 1000; border: 1px solid #d4af37; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                <span style="background: #d4af37; color: white; border-radius: 50%; padding: 2px 8px; font-size: 0.8rem; font-weight: bold;">@cartCount</span>
                 <span>View Order • @cartTotal.ToString("C")</span>
             </div>
         }
     </div>
 
-    @* --- cart logic and modal. do not alter -@mclark48 *@
+    @* --- THE MODAL POPUP do not alter -@mclark48--- *@
     @if (showCart)
     {
         <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(44, 30, 26, 0.9); display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(8px);">
@@ -142,7 +129,7 @@
                             <div style="font-size: 3rem; color: #28a745;">✔</div>
                             <h3 style="font-family: 'Playfair Display', serif;">Grazie!</h3>
                             <p>Your order has been sent to the kitchen.</p>
-                            <button class="btn-gold" @onclick="ToggleCart">Close</button>
+                            <button class="btn-gold" @onclick="ToggleCart">Close Menu</button>
                         </div>
                     }
                 </div>
@@ -150,17 +137,20 @@
                 @if (paymentStep < 3 && Cart.Any())
                 {
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #2c1e1a;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                            <span style="color: #666;">Total</span>
-                            <span style="font-weight: bold; font-size: 1.3rem;">@cartTotal.ToString("C")</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <span style="font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px;">Total Amount</span>
+                            <span style="font-size: 1.5rem; color: #2c1e1a; font-family: 'Playfair Display', serif; font-weight: bold;">@cartTotal.ToString("C")</span>
                         </div>
                         @if (paymentStep == 1)
                         {
-                            <button @onclick="() => paymentStep = 2" class="btn-gold w-100">Checkout</button>
+                            <button @onclick="() => paymentStep = 2" 
+                                    style="width: 100%; padding: 18px; background: linear-gradient(135deg, #d4af37 0%, #b8962e 100%); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);">
+                                Proceed to Checkout
+                            </button>
                         }
                         else
                         {
-                            <button @onclick="() => paymentStep = 1" class="btn btn-link text-muted w-100">Back to Review</button>
+                            <button @onclick="() => paymentStep = 1" class="btn btn-link text-muted w-100" style="text-decoration: none; font-weight: 600;">&larr; Back to Review</button>
                         }
                     </div>
                 }
@@ -168,6 +158,10 @@
         </div>
     }
 </main>
+
+<footer class="site-footer">
+    <p>&copy; 2026 Chanterelle's Italian Restaurant</p>
+</footer>
 
 @code {
     private bool showCart = false;

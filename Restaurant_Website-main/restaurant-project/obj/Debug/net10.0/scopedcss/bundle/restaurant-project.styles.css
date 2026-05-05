@@ -97,10 +97,9 @@
     }
 
     .nav-scrollable[b-o21ru2sv4j] {
-        /* Never collapse the sidebar for wide screens */
+        /*sidebar scroll for wide menus  */
         display: block;
-
-        /* Allow sidebar to scroll for tall menus */
+        /* scroll for tall menu */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }

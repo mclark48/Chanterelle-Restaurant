@@ -3,18 +3,18 @@ using restaurant_project.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Add services to the container.
+// adds services to container -@mclark48
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// 2. Add custom Services
+// adds custom services. notice they are different. i forgot and it broke things.-@mclark48
 builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<UserSession>(); // Add this line here!
+builder.Services.AddScoped<UserSession>();
 
-// 3. Build the app (The "Lock" line)
+//actually builds the app - do not alter -@mclark48
 var app = builder.Build();
 
-// 4. Configure the HTTP request pipeline.
+// HTTP request - @mclark48
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
@@ -25,6 +25,7 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 app.MapStaticAssets();
 
+//Runs the program. -@mclark48
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

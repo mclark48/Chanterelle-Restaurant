@@ -1,7 +1,8 @@
-using restaurant_project.Models; // This tells it where to find the 'User' class
+using restaurant_project.Models; // used this for verification but am scared to delete -@mclark48
 
 namespace restaurant_project.Services;
 
+//this class shows loggedin vs loggedout status. -@mclark48
 public class UserSession
 {
     public User? CurrentUser { get; private set; }

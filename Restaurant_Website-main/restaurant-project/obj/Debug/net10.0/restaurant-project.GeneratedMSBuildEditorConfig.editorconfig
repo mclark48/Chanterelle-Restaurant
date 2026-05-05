@@ -11,69 +11,69 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = restaurant-project
 build_property.RootNamespace = restaurant-project
-build_property.ProjectDir = /workspaces/Restaurant_Website/restaurant-project/
+build_property.ProjectDir = /workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /workspaces/Restaurant_Website/restaurant-project
+build_property.MSBuildProjectDirectory = /workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/App.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/About.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/About.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BYm91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Contact.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Contact.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db250YWN0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Error.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Home.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Login.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Mb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/NotFound.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ob3RGb3VuZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Order.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Order.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcmRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Pages/Signup.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Pages/Signup.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TaWdudXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Routes.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/_Imports.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Layout/MainLayout.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-qyx9vk3p7k
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Layout/NavMenu.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-o21ru2sv4j
 
-[/workspaces/Restaurant_Website/restaurant-project/Components/Layout/ReconnectModal.razor]
+[/workspaces/Chanterelle-Restaurant/Restaurant_Website-main/restaurant-project/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-pzubwd3vzp
