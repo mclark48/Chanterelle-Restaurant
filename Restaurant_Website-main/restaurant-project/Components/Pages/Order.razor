@@ -1,0 +1,234 @@
+@page "/order"
+@using restaurant_project.Services
+@inject UserSession UserSession
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<PageTitle>Chanterelle's Italian - Order Now</PageTitle>
+
+<header class="site-header">
+    <div class="logo">
+        <img src="images/logo.png" alt="Chanterelle's logo">
+    </div>
+    <nav class="main-nav">
+        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+        <NavLink class="nav-link" href="order">Order Now</NavLink>
+        <NavLink class="nav-link" href="signup">Signup</NavLink> 
+        <NavLink class="nav-link" href="login">Login</NavLink>   
+    </nav>
+</header>
+
+<main class="container">
+    <div class="order-page">
+        <h2 class="text-center my-4" style="font-family: 'Playfair Display', serif;">Authentic Italian Menu</h2>
+
+        <div class="menu-sections" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    @foreach (var category in new[] { "Appetizer", "Pasta", "Main", "Dessert" })
+    {
+        <div class="category-block mb-5">
+            <h2 class="text-center mb-4" style="font-family: 'Playfair Display', serif; font-style: italic; color: #2c1e1a;">
+                @category
+            </h2>
+            
+            <div class="menu-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 40px;">
+                @foreach (var item in MenuItems.Where(i => i.Category == category))
+                {
+                    <div class="menu-item-card">
+                        <div class="image-container">
+                            <img src="@item.ImagePath" alt="@item.Name" class="menu-image-spot" />
+                        </div>
+                        <div class="menu-info" style="padding: 25px; text-align: center;">
+                            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 10px;">@item.Name</h3>
+                            <p style="font-family: 'Inter', sans-serif; font-weight: 300; color: #666; font-size: 0.9rem; line-height: 1.6;">
+                                @item.Description
+                            </p>
+                            <div style="margin-top: 20px;">
+                                <span class="menu-price" style="display: block; margin-bottom: 15px; font-size: 1.2rem;">
+                                    @item.Price.ToString("C")
+                                </span>
+                                <button class="btn-gold" 
+                                        style="width: auto; padding: 10px 40px; border-radius: 0; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;"
+                                        @onclick='() => AddToCart(item)'>
+                                    Add to Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+        @if (cartCount > 0)
+        {
+            <div class="cart-floating-bar" @onclick="ToggleCart">
+                <span class="cart-count-badge">@cartCount</span>
+                <span>View Order • @cartTotal.ToString("C")</span>
+            </div>
+        }
+    </div>
+
+    @* --- CONSOLIDATED CART MODAL --- *@
+    @if (showCart)
+    {
+        <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(44, 30, 26, 0.9); display: flex; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(8px);">
+            <div style="background: white; width: 95%; max-width: 550px; border-radius: 20px; padding: 30px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); position: relative; max-height: 85vh; display: flex; flex-direction: column;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #fdfaf5; padding-bottom: 15px;">
+                    <h2 style="font-family: 'Playfair Display', serif; color: #2c1e1a; margin: 0;">Your Order</h2>
+                    <button @onclick="ToggleCart" style="background: #2c1e1a; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer;">&times;</button>
+                </div>
+
+                <div style="overflow-y: auto; flex-grow: 1;">
+                    @if (paymentStep == 1)
+                    {
+                        @if (!Cart.Any())
+                        {
+                            <p style="text-align: center; color: #999; padding: 40px 0;">Your cart is empty.</p>
+                        }
+                        else
+                        {
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid #eee; color: #888; font-size: 0.8rem; text-transform: uppercase;">
+                                        <th style="text-align: left; padding-bottom: 10px;">Item</th>
+                                        <th style="text-align: center; padding-bottom: 10px;">Qty</th>
+                                        <th style="text-align: right; padding-bottom: 10px;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cartItem in Cart)
+                                    {
+                                        <tr style="border-bottom: 1px solid #fdfaf5;">
+                                            <td style="padding: 15px 0; font-weight: 600;">@cartItem.Item.Name</td>
+                                            <td style="text-align: center;">
+                                                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                                    <button @onclick="() => ChangeQuantity(cartItem, -1)" style="border: 1px solid #ddd; background: white; border-radius: 4px; width: 24px;">-</button>
+                                                    <span>@cartItem.Quantity</span>
+                                                    <button @onclick="() => ChangeQuantity(cartItem, 1)" style="border: 1px solid #ddd; background: white; border-radius: 4px; width: 24px;">+</button>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: right; color: #a52a2a; font-weight: bold;">@((cartItem.Item.Price * cartItem.Quantity).ToString("C"))</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                    else if (paymentStep == 2)
+                    {
+                        <div style="padding: 10px 0;">
+                            <h4 style="font-family: 'Playfair Display', serif;">Secure Checkout</h4>
+                            <div class="mb-3">
+                                <label class="small fw-bold">Card Number</label>
+                                <input type="text" @bind="cardNumber" class="form-control" placeholder="1234 5678 1234 5678" maxlength="16" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="small fw-bold">Expiry (MM/YY)</label>
+                                <input type="text" @bind="expiry" class="form-control" placeholder="12/26" />
+                            </div>
+                            @if (!string.IsNullOrEmpty(errorMessage)) { <p style="color: #a52a2a; font-size: 0.8rem;">@errorMessage</p> }
+
+                            @if (UserSession.IsLoggedIn) {
+                                <button class="btn-gold w-100" @onclick="ProcessFakePayment">Confirm & Pay @cartTotal.ToString("C")</button>
+                            } else {
+                                <div class="alert alert-warning small">Please <a href="login">Login</a> to pay.</div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="text-align: center; padding: 40px 0;">
+                            <div style="font-size: 3rem; color: #28a745;">✔</div>
+                            <h3 style="font-family: 'Playfair Display', serif;">Grazie!</h3>
+                            <p>Your order has been sent to the kitchen.</p>
+                            <button class="btn-gold" @onclick="ToggleCart">Close</button>
+                        </div>
+                    }
+                </div>
+
+                @if (paymentStep < 3 && Cart.Any())
+                {
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #2c1e1a;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                            <span style="color: #666;">Total</span>
+                            <span style="font-weight: bold; font-size: 1.3rem;">@cartTotal.ToString("C")</span>
+                        </div>
+                        @if (paymentStep == 1)
+                        {
+                            <button @onclick="() => paymentStep = 2" class="btn-gold w-100">Checkout</button>
+                        }
+                        else
+                        {
+                            <button @onclick="() => paymentStep = 1" class="btn btn-link text-muted w-100">Back to Review</button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</main>
+
+@code {
+    private bool showCart = false;
+    private int paymentStep = 1;
+    private List<CartItem> Cart = new();
+    private string cardNumber = "";
+    private string expiry = "";
+    private string errorMessage = "";
+
+    private int cartCount => Cart.Sum(i => i.Quantity);
+    private decimal cartTotal => Cart.Sum(i => i.Item.Price * i.Quantity);
+
+    public class MenuItem {
+        public string Category { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
+        public decimal Price { get; set; }
+        public string ImagePath { get; set; } = "";
+    }
+
+    public class CartItem {
+        public MenuItem Item { get; set; } = default!;
+        public int Quantity { get; set; }
+    }
+
+    private List<MenuItem> MenuItems = new List<MenuItem> {
+        new MenuItem { Category = "Appetizer", Name = "Bruschetta Classica", Description = "Toasted ciabatta with garlic and basil.", Price = 10.00m, ImagePath = "/images/menu/bruschetta.jpg" },
+        new MenuItem { Category = "Appetizer", Name = "Calamari Fritti", Description = "Crispy fried squid with spicy marinara.", Price = 14.00m, ImagePath = "/images/menu/calamari.jpg" },
+        new MenuItem { Category = "Pasta", Name = "Pappardelle al Telefono", Description = "Ribbons with mozzarella and basil.", Price = 18.00m, ImagePath = "/images/menu/pappardelle.jpg" },
+        new MenuItem { Category = "Pasta", Name = "Classic Lasagna", Description = "Beef ragù and béchamel.", Price = 21.00m, ImagePath = "/images/menu/lasagna.jpg" },
+        new MenuItem { Category = "Main", Name = "Chicken Parmigiana", Description = "Breaded chicken with mozzarella.", Price = 24.00m, ImagePath = "/images/menu/chicken_parm.jpg" },
+        new MenuItem { Category = "Main", Name = "Osso Buco", Description = "Slow-braised veal shanks.", Price = 32.00m, ImagePath = "/images/menu/osso_buco.jpg" },
+        new MenuItem { Category = "Dessert", Name = "Tiramisu", Description = "Coffee ladyfingers and mascarpone.", Price = 9.00m, ImagePath = "/images/menu/tiramisu.jpg" },
+        new MenuItem { Category = "Dessert", Name = "Cannoli Siciliani", Description = "Ricotta filled pastry shells.", Price = 8.00m, ImagePath = "/images/menu/cannoli.jpg" }
+    };
+
+    private void AddToCart(MenuItem item) {
+        var existing = Cart.FirstOrDefault(i => i.Item.Name == item.Name);
+        if (existing != null) existing.Quantity++;
+        else Cart.Add(new CartItem { Item = item, Quantity = 1 });
+    }
+
+    private void ChangeQuantity(CartItem item, int change) {
+        item.Quantity += change;
+        if (item.Quantity <= 0) Cart.Remove(item);
+    }
+
+    private void ToggleCart() {
+        showCart = !showCart;
+        if (showCart) paymentStep = 1;
+        errorMessage = "";
+    }
+
+    private async Task ProcessFakePayment() {
+        if (string.IsNullOrWhiteSpace(cardNumber) || cardNumber.Length < 16) {
+            errorMessage = "Please enter a valid 16-digit card number.";
+            return;
+        }
+        errorMessage = "Processing...";
+        await Task.Delay(1500); 
+        paymentStep = 3; 
+        Cart.Clear();
+    }
+}

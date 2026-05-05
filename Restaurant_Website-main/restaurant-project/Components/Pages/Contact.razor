@@ -1,0 +1,42 @@
+@page "/contact"
+
+<PageTitle>Chanterelle's Italian - Contact</PageTitle>
+
+<div class="contact-page">
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Chanterelle's restaurant logo">
+        </div>
+        <nav>
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Home</NavLink>
+    <NavLink class="nav-link" href="order">Order Now</NavLink>
+    <NavLink class="nav-link" href="about">About Us</NavLink>
+    <NavLink class="nav-link" href="contact">Contact</NavLink>
+</nav>
+    </header>
+    
+    <main class="container">
+        <div class="contact-content">
+            <h2>Contact us easily here!</h2>
+            <p>If you have any issues or questions about our site, please fill out the form:</p>
+
+            <form>
+                <label for="name">What is your name?</label>
+                <input type="text" id="name" name="name" placeholder="John Doe">
+
+                <label for="email">What is your email?</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com">
+
+                <label for="issue">Enter your message here:</label>
+                <textarea id="message" name="message" placeholder="..."></textarea>
+
+                @* The submit button is below for the user to send out their report *@
+                <button type="submit" class="btn-submit">Send</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Chanterelle's - 2026</p>
+    </footer>
+</div>

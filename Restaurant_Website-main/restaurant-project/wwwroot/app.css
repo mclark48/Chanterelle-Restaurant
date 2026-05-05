@@ -1,0 +1,290 @@
+/* --- 1. FONTS & TYPOGRAPHY --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-dark: #b8962e;
+    --cream: #fdfaf5;
+    --espresso: #2c1e1a;
+    --tomato: #a52a2a;
+}
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: var(--cream) !important;
+    color: var(--espresso) !important;
+    font-family: 'Inter', sans-serif !important;
+    min-height: 100vh;
+}
+
+h1, h2, h3, .gold-text {
+    font-family: 'Playfair Display', serif !important;
+}
+
+.nav-link, header nav a {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-size: 0.85rem !important;
+}
+
+/* --- 2. NAVIGATION & HEADER --- */
+header, .site-header {
+    background-color: #ffffff !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem 5% !important;
+    border-bottom: 3px solid var(--gold) !important;
+    z-index: 100;
+}
+
+nav {
+    display: flex !important;
+    gap: 20px !important;
+}
+
+.nav-link {
+    color: var(--espresso) !important;
+    text-decoration: none !important;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--gold) !important;
+}
+
+/* --- 3. LAYOUT CONTAINERS & CARDS --- */
+.hero-card, .container, .signup-card, .hero-card-login {
+    background-color: #ffffff !important;
+    margin: 40px auto !important;
+    padding: 3rem !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 35px rgba(44, 30, 26, 0.1) !important;
+    text-align: center !important;
+    max-width: 550px;
+    width: 90%;
+}
+
+.signup-page-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--cream) !important;
+    min-height: 100vh !important;
+}
+
+/* --- 4. FORM ELEMENTS --- */
+.form-control {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px !important;
+    margin-bottom: 15px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    box-sizing: border-box;
+}
+
+.alert-danger {
+    color: var(--tomato);
+    background-color: #ffe6e6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* --- 5. BUTTONS --- */
+.btn-gold, .menu-button, .btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%) !important;
+    color: white !important;
+    padding: 12px 30px !important;
+    border-radius: 8px !important;
+    font-weight: bold !important;
+    display: inline-block !important;
+    border: none !important;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3) !important;
+    transition: 0.3s;
+}
+
+.btn-gold:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.4) !important;
+}
+
+.btn-heritage {
+    background: transparent !important;
+    border: 1px solid var(--gold) !important;
+    color: var(--gold) !important;
+    padding: 8px 20px !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-heritage:hover {
+    background: var(--gold) !important;
+    color: white !important;
+}
+
+/* --- 6. ORDER PAGE & MENU --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.menu-item-card {
+    background: white !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.menu-price {
+    font-weight: bold;
+    color: var(--tomato);
+}
+
+/* --- 7. CART OVERLAY --- */
+.cart-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 99999 !important;
+}
+
+.cart-modal {
+    background: white !important;
+    padding: 2.5rem !important;
+    border-radius: 20px !important;
+    width: 90% !important;
+    max-width: 550px !important;
+}
+
+/* --- 8. MENU GRID & IMAGE FIXES --- */
+
+/* This is the container for the whole menu */
+.menu-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    padding: 40px 5% !important;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* The Card itself */
+.menu-item-card {
+    background: white !important;
+    border-radius: 15px !important;
+    overflow: hidden !important; /* Clips image corners */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100%; /* Ensures all cards in a row are same height */
+}
+
+/* THE MISSING IMAGE CLASS */
+.menu-image-spot {
+    width: 100% !important;
+    height: 200px !important; /* Fixed height for consistency */
+    object-fit: cover !important; /* Crops to fit perfectly */
+    object-position: center !important;
+    border-bottom: 2px solid var(--cream);
+}
+
+.menu-info {
+    padding: 20px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.menu-info h3 {
+    margin: 0 0 10px 0 !important;
+    font-size: 1.4rem !important;
+    color: var(--espresso);
+}
+
+.menu-price {
+    font-weight: 700;
+    color: var(--tomato);
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* --- LUXURY MENU OVERHAUL --- */
+
+/* 1. Category Headers */
+summary.h4 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 1.8rem !important;
+    color: #2c1e1a !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 10px;
+    margin-top: 30px;
+    list-style: none; /* Removes the default arrow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+summary.h4::before {
+    content: '— ';
+    color: var(--gold);
+    margin-right: 10px;
+}
+
+summary.h4::after {
+    content: ' —';
+    color: var(--gold);
+    margin-left: 10px;
+}
+
+/* 2. Elevated Cards */
+.menu-item-card {
+    background: #fff !important;
+    border: none !important;
+    border-radius: 0px !important; /* Sharp, modern edges or very slight rounding */
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+}
+
+.menu-item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+}
+
+/* 3. The Image "Reveal" */
+.image-container {
+    overflow: hidden;
+    height: 240px;
+}
+
+.menu-image-spot {
+    transition: transform 0.8s ease;
+}
+
+.menu-item-card:hover .menu-image-spot {
+    transform: scale(1.1); /* Subtle zoom on hover */
+}
+
+/* 4. Luxury Pricing */
+.menu-price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300 !important;
+    letter-spacing: 1px;
+    color: var(--gold-dark) !important;
+}

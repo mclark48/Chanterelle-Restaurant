@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "+JqMia7sQS4=",
+  "success": true,
+  "projectFilePath": "/workspaces/Restaurant_Website/restaurant-project/restaurant-project.csproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/bcrypt.net-next/4.1.0/bcrypt.net-next.4.1.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.4/microsoft.aspnetcore.app.internal.assets.10.0.4.nupkg.sha512",
+    "/home/codespace/.nuget/packages/npgsql/10.0.2/npgsql.10.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
