@@ -4,21 +4,23 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          lfs: false
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x' 
+
+      - name: Publish App
+        run: dotnet publish Restaurant_Website-main/restaurant-project/restaurant-project.csproj -c Release -o release
 
       - name: Build And Deploy
         id: builddeploy
@@ -27,8 +29,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_SEA_0F3650C0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "Restaurant_Website-main/restaurant-project"
+          app_location: "release/wwwroot" # This is where the manual publish puts the files
           api_location: ""
-          output_location: "wwwroot"
-          ###### THE FIX: Tells Azure the build is already handled ######
-          is_static_export: true
+          output_location: "" # Leave blank because we already built it
+          skip_app_build: true # Tells Azure "Don't try to build it, I already did"
