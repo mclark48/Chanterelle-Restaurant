@@ -14,14 +14,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x' 
-
-      - name: Publish App
-        run: dotnet publish Restaurant_Website-main/restaurant-project/restaurant-project.csproj -c Release -o release
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -29,7 +21,8 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_SEA_0F3650C0F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "release/wwwroot" # This is where the manual publish puts the files
+          ###### THE RESET ######
+          app_location: "Restaurant_Website-main/restaurant-project"
           api_location: ""
-          output_location: "" # Leave blank because we already built it
-          skip_app_build: true # Tells Azure "Don't try to build it, I already did"
+          output_location: "wwwroot"
+          # We remove all manual publish steps and let Azure use its internal Blazor recipe
