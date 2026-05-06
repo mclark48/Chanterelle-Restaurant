@@ -18,7 +18,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: '416610ff-917f-4695-ac86-dd9d52a0601d' 
-          tenant-id: '754f9227-2c90-410d-8386-3023e1075d9e'
+          tenant-id: 'stumailnortheaststate.onmicrosoft.com' 
           subscription-id: 'b5cead49-bb71-4580-8722-db7cba388d62'
 
       - name: Set up .NET
