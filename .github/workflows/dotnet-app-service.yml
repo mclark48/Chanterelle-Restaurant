@@ -1,0 +1,31 @@
+name: Deploy Blazor Server to Azure App Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: dotnet publish
+        # This builds your nested project correctly
+        run: dotnet publish Restaurant_Website-main/restaurant-project/restaurant-project.csproj -c Release -o ./publish
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          # Change this to 'Chanterelle-Italian' or your exact App Service name
+          app-name: 'Chanterelle-Italian'
+          # Check your GitHub Secrets for the exact name Azure created!
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
+          package: ./publish
