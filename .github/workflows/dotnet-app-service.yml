@@ -1,31 +1,38 @@
-name: Deploy Blazor Server to Azure App Service
+name: Deploy Blazor Server (OIDC Method)
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+
+# This part is mandatory for the "Trust" method to work
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          # Get these from the Overview page of your Managed Identity
+          client-id: 'PASTE_MANAGED_IDENTITY_CLIENT_ID' 
+          tenant-id: 'PASTE_TENANT_ID' 
+          subscription-id: 'b5cead49-bb71-4580-8722-db7cba388d62'
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      - name: dotnet publish
-        # This builds your nested project correctly
-        run: dotnet publish Restaurant_Website-main/restaurant-project/restaurant-project.csproj -c Release -o ./publish
+      - name: Publish
+        run: dotnet publish Restaurant_Website-main/restaurant-project/restaurant-project.csproj -c Release -o out
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to App Service
         uses: azure/webapps-deploy@v3
         with:
-          # Change this to 'Chanterelle-Italian' or your exact App Service name
           app-name: 'Chanterelle-Italian'
-          # Check your GitHub Secrets for the exact name Azure created!
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
-          package: ./publish
+          package: out
